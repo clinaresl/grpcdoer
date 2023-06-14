@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "./;todoproto";
+
+// Service definition
+//
+// There is only one service which consits of managing tasks
+service TaskService {
+    rpc AddTask (AddTaskRequest) returns (AddTaskResponse) {}
+    rpc DoneTask (DoneTaskRequest) returns (DoneTaskResponse) {}
+    rpc ListTasks (ListTasksRequest) returns (ListTasksResponse) {}
+}
+
+// Message definition
+
+// Request messages
+message AddTaskRequest {
+    string desc = 1;
+    string project = 2;
+    string due = 3;
+}
+
+message DoneTaskRequest {
+    string id = 1;
+}
+
+message ListTasksRequest {} // empty
+
+// Response messages
+message AddTaskResponse {
+    string id = 1;
+}
+
+message DoneTaskResponse {} // empty
+
+message ListTasksResponse {
+    repeated TaskInfo tasks = 1;
+}
+
+message TaskInfo {
+    string desc = 1;
+    string project = 2;
+    string due = 3;
+}
